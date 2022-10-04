@@ -24,10 +24,9 @@ class HomeTableTableViewController: UITableViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadTweets(numberTweets: numberOfTweet)
+        self.loadTweets()
     }
-    
-    @objc func loadTweets(numberTweets: Int){
+    @objc func loadTweets(){
         let myURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         let myParams = ["count": numberOfTweet]
         
@@ -47,7 +46,7 @@ class HomeTableTableViewController: UITableViewController {
     
     func loadMoreTweets(){
         numberOfTweet = numberOfTweet + 20
-        loadTweets(numberTweets: numberOfTweet)
+        loadTweets()
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -79,6 +78,7 @@ class HomeTableTableViewController: UITableViewController {
         cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)
         cell.setreTweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
         cell.tweetId = tweetArray[indexPath.row]["id"] as! Int
+        
         
         return cell
     }
